@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "cantonese": "你食咗飯未呀？",
+    "jyutping": "nei5 sik6 zo2 faan6 mei6 aa3?",
+    "english": "Have you eaten yet?",
+    "korean": "밥 먹었어?",
+    "level": "A1",
+    "tags": ["daily", "conversation"]
+  },
+  {
+    "id": 2,
+    "cantonese": "我而家去緊公司。",
+    "jyutping": "ngo5 ji4 gaa1 heoi3 gan2 gung1 si1.",
+    "english": "I'm going to work now.",
+    "korean": "나 지금 회사 가는 중이야.",
+    "level": "A1",
+    "tags": ["daily", "commute"]
+  },
+  {
+    "id": 3,
+    "cantonese": "你今日得唔得閒呀？",
+    "jyutping": "nei5 gam1 jat6 dak1 m4 dak1 haan4 aa3?",
+    "english": "Are you free today?",
+    "korean": "오늘 시간 있어?",
+    "level": "A1",
+    "tags": ["daily", "plans"]
+  },
+  {
+    "id": 4,
+    "cantonese": "呢間餐廳幾好食。",
+    "jyutping": "ni1 gaan1 caan1 teng1 gei2 hou2 sik6.",
+    "english": "This restaurant is pretty good.",
+    "korean": "이 식당 꽤 맛있어.",
+    "level": "A2",
+    "tags": ["food", "travel"]
+  },
+  {
+    "id": 5,
+    "cantonese": "我聽日再搵你。",
+    "jyutping": "ngo5 ting1 jat6 zoi3 wan2 nei5.",
+    "english": "I'll contact you again tomorrow.",
+    "korean": "내일 다시 연락할게.",
+    "level": "A1",
+    "tags": ["daily", "conversation"]
+  },
+  {
+    "id": 6,
+    "cantonese": "唔該，呢個幾多錢呀？",
+    "jyutping": "m4 goi1, ni1 go3 gei2 do1 cin2 aa3?",
+    "english": "Excuse me, how much is this?",
+    "korean": "실례지만, 이거 얼마예요?",
+    "level": "A1",
+    "tags": ["shopping", "travel"]
+  },
+  {
+    "id": 7,
+    "cantonese": "我想要一杯凍檸茶。",
+    "jyutping": "ngo5 soeng2 jiu3 jat1 bui1 dung3 ling4 caa4.",
+    "english": "I'd like a glass of iced lemon tea.",
+    "korean": "아이스 레몬티 한 잔 주세요.",
+    "level": "A1",
+    "tags": ["food", "drink", "travel"]
+  },
+  {
+    "id": 8,
+    "cantonese": "呢度點去地鐵站呀？",
+    "jyutping": "ni1 dou6 dim2 heoi3 dei6 tit3 zaam6 aa3?",
+    "english": "How do I get to the MTR station from here?",
+    "korean": "여기서 지하철역은 어떻게 가요?",
+    "level": "A2",
+    "tags": ["directions", "travel"]
+  },
+  {
+    "id": 9,
+    "cantonese": "我唔係好明。",
+    "jyutping": "ngo5 m4 hai6 hou2 ming4.",
+    "english": "I don't really understand.",
+    "korean": "잘 이해가 안 돼요.",
+    "level": "A1",
+    "tags": ["learning", "conversation"]
+  },
+  {
+    "id": 10,
+    "cantonese": "可唔可以講慢啲呀？",
+    "jyutping": "ho2 m4 ho2 ji5 gong2 maan6 di1 aa3?",
+    "english": "Could you speak a bit slower?",
+    "korean": "조금 천천히 말해줄 수 있어요?",
+    "level": "A2",
+    "tags": ["learning", "conversation"]
+  },
+  {
+    "id": 11,
+    "cantonese": "我今日有啲攰。",
+    "jyutping": "ngo5 gam1 jat6 jau5 di1 gui6.",
+    "english": "I'm a bit tired today.",
+    "korean": "나 오늘 좀 피곤해.",
+    "level": "A1",
+    "tags": ["daily", "feelings"]
+  },
+  {
+    "id": 12,
+    "cantonese": "你想飲啲咩呀？",
+    "jyutping": "nei5 soeng2 jam2 di1 me1 aa3?",
+    "english": "What would you like to drink?",
+    "korean": "뭐 마시고 싶어?",
+    "level": "A1",
+    "tags": ["food", "conversation"]
+  },
+  {
+    "id": 13,
+    "cantonese": "我哋喺邊度等呀？",
+    "jyutping": "ngo5 dei6 hai2 bin1 dou6 dang2 aa3?",
+    "english": "Where should we wait?",
+    "korean": "우리 어디서 기다릴까?",
+    "level": "A2",
+    "tags": ["plans", "travel"]
+  },
+  {
+    "id": 14,
+    "cantonese": "呢個位有冇人坐呀？",
+    "jyutping": "ni1 go3 wai2 jau5 mou5 jan4 co5 aa3?",
+    "english": "Is anyone sitting here?",
+    "korean": "여기 자리 주인 있어요?",
+    "level": "A2",
+    "tags": ["travel", "conversation"]
+  },
+  {
+    "id": 15,
+    "cantonese": "我下次再嚟香港。",
+    "jyutping": "ngo5 haa6 ci3 zoi3 lai4 hoeng1 gong2.",
+    "english": "I'll come to Hong Kong again next time.",
+    "korean": "다음에 홍콩에 또 올게요.",
+    "level": "A2",
+    "tags": ["travel", "conversation"]
+  }
+]
