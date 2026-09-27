@@ -1,6 +1,8 @@
 # Cantonese Daily
 
-A small personal automation that sends 5 beginner-friendly Cantonese sentences to Telegram every morning at 7:00 AM Korea Standard Time.
+A small personal automation that sends 5 beginner-to-intermediate Cantonese sentences to Telegram every morning at 7:00 AM Korea Standard Time.
+
+Each run randomly chooses one of 50 learning topics, then favours related daily-conversation sentences. Every entry includes Cantonese, Jyutping, Korean, and English; Cantonese sentences are at least 10 characters long.
 
 The learning flow is intentionally simple:
 
@@ -19,6 +21,7 @@ No web app, database server, or always-on Mac is required.
 cantonese-daily/
 ├── data/
 │   ├── sentences.json
+│   ├── topics.json
 │   ├── history.json
 │   └── vocabulary.json
 ├── src/
@@ -38,9 +41,9 @@ Every day, GitHub Actions runs `python src/send_daily.py`.
 
 The script:
 
-1. Reads `data/sentences.json`.
-2. Reads `data/history.json`.
-3. Selects exactly 5 sentences, preferring `A1` and `A2` sentences.
+1. Reads `data/sentences.json` and the 50-topic catalogue in `data/topics.json`.
+2. Randomly selects one learning topic.
+3. Reads `data/history.json` and selects exactly 5 related sentences, preferring `A1` and `A2` sentences.
 4. Avoids sentences sent in the last 30 days when possible.
 5. Sends the message through the Telegram Bot API.
 6. Updates `data/history.json` only after Telegram confirms success.

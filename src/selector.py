@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 SENTENCES_PATH = DATA_DIR / "sentences.json"
+TOPICS_PATH = DATA_DIR / "topics.json"
 HISTORY_PATH = DATA_DIR / "history.json"
 APP_TIME_ZONE = ZoneInfo("Asia/Seoul")
 
@@ -50,6 +51,25 @@ def load_sentences(path: Path = SENTENCES_PATH) -> list[dict[str, Any]]:
         seen_ids.add(sentence_id)
 
     return sentences
+
+
+def load_topics(path: Path = TOPICS_PATH) -> list[dict[str, Any]]:
+    with path.open("r", encoding="utf-8") as file:
+        topics = json.load(file)
+
+    if not isinstance(topics, list) or len(topics) != 50:
+        raise ValueError(f"{path} must contain exactly 50 topics.")
+
+    for index, topic in enumerate(topics, start=1):
+        if not isinstance(topic, dict) or not {"id", "title", "korean", "tags"} <= topic.keys():
+            raise ValueError(f"Topic #{index} is missing a required field.")
+        if not isinstance(topic["tags"], list) or not topic["tags"]:
+            raise ValueError(f"Topic #{index} must include at least one tag.")
+    return topics
+
+
+def select_daily_topic(topics: list[dict[str, Any]]) -> dict[str, Any]:
+    return random.choice(topics)
 
 
 def load_history(path: Path = HISTORY_PATH) -> dict[str, Any]:
@@ -129,7 +149,45 @@ def select_daily_sentences(
             selected_ids.add(sentence["id"])
             if len(selected) == count:
                 random.shuffle(selected)
+    return selected
+
+
+def select_topic_sentences(
+    sentences: list[dict[str, Any]],
+    history: dict[str, Any],
+    topic: dict[str, Any],
+    *,
+    count: int = 5,
+) -> list[dict[str, Any]]:
+    """Prefer sentences related to the chosen topic, then complete the set safely."""
+    eligible_sentences = [
+        sentence for sentence in sentences if len(str(sentence["cantonese"])) >= 10
+    ]
+    if len(eligible_sentences) < count:
+        raise ValueError(f"Need at least {count} sentences with 10 or more characters.")
+
+    topic_tags = set(topic["tags"])
+    recent_ids = get_recent_sentence_ids(history)
+    related = [
+        sentence for sentence in eligible_sentences if topic_tags.intersection(sentence.get("tags", []))
+    ]
+    unrelated = [sentence for sentence in eligible_sentences if sentence not in related]
+    pools = [
+        [sentence for sentence in related if sentence["id"] not in recent_ids],
+        [sentence for sentence in related if sentence["id"] in recent_ids],
+        [sentence for sentence in unrelated if sentence["id"] not in recent_ids],
+        [sentence for sentence in unrelated if sentence["id"] in recent_ids],
+    ]
+
+    selected: list[dict[str, Any]] = []
+    for pool in pools:
+        random.shuffle(pool)
+        for sentence in pool:
+            if sentence not in selected:
+                selected.append(sentence)
+            if len(selected) == count:
                 return selected
+    raise ValueError(f"Could not select {count} unique sentences.")
 
     raise ValueError(f"Could not select {count} unique sentences.")
 
