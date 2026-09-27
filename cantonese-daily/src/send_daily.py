@@ -12,8 +12,10 @@ from selector import (
     current_kst_date,
     load_history,
     load_sentences,
+    load_topics,
     record_sent_sentences,
-    select_daily_sentences,
+    select_daily_topic,
+    select_topic_sentences,
 )
 
 
@@ -24,24 +26,28 @@ class TelegramError(RuntimeError):
     pass
 
 
-def build_daily_message(sentences: list[dict[str, Any]], *, message_date: date | None = None) -> str:
+def build_daily_message(
+    topic: dict[str, Any], sentences: list[dict[str, Any]], *, message_date: date | None = None
+) -> str:
     message_date = message_date or current_kst_date()
-    circled_numbers = ["①", "②", "③", "④", "⑤"]
-    lines = [f"🇭🇰 <b>Cantonese Daily — {message_date.isoformat()}</b>", ""]
+    lines = [
+        f"<b>Cantonese Daily | {message_date.isoformat()}</b>",
+        f"Topic: <b>{html.escape(str(topic['title']))}</b>",
+        f"주제: {html.escape(str(topic['korean']))}",
+        "",
+    ]
 
     for index, sentence in enumerate(sentences):
-        number = circled_numbers[index] if index < len(circled_numbers) else f"{index + 1}."
         lines.extend(
             [
-                f"{number} {html.escape(str(sentence['cantonese']))}",
-                html.escape(str(sentence["jyutping"])),
-                html.escape(str(sentence["english"])),
-                html.escape(str(sentence["korean"])),
+                f"• <b>{html.escape(str(sentence['cantonese']))}</b>",
+                f"  Jyutping: {html.escape(str(sentence['jyutping']))}",
+                f"  Korean: {html.escape(str(sentence['korean']))}",
+                f"  English: {html.escape(str(sentence['english']))}",
                 "",
             ]
         )
 
-    lines.append("✍️ Write these down and review them today.")
     return "\n".join(lines)
 
 
@@ -93,8 +99,9 @@ def main() -> int:
     try:
         sentences = load_sentences()
         history = load_history()
-        selected = select_daily_sentences(sentences, history)
-        message = build_daily_message(selected)
+        topic = select_daily_topic(load_topics())
+        selected = select_topic_sentences(sentences, history, topic)
+        message = build_daily_message(topic, selected)
 
         send_telegram_message(message)
         record_sent_sentences([sentence["id"] for sentence in selected])
